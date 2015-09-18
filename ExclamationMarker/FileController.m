@@ -1,16 +1,16 @@
 //
-//  ViewController.h
+//  FileController.m
 //  ExclamationMarker
 //
 //  Created by shouding on 9/17/15.
 //  Copyright © 2015 shouding. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "FileController.h"
 
-@interface ViewController : NSViewController
 
-- (NSURL *) exOpenFile;
+@implementation FileController
+
+@synthesize storageType;
 
 @end
-
