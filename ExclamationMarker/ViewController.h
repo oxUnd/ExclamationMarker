@@ -11,6 +11,7 @@
 @interface ViewController : NSViewController
 
 @property (weak) IBOutlet NSTextField *showUrl;
+
 - (NSURL *) exOpenFile;
 
 @end

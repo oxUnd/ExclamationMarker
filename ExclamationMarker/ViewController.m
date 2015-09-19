@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "EMUploader.h"
+#import "EMConfig.h"
 
 @implementation ViewController
 
@@ -52,29 +53,37 @@
         return;
     }
     
-    NSURL * serverUrl = [NSURL URLWithString: @"http://127.0.0.1:8088/index/upload"];
+    EMConfig *config = [[EMConfig alloc] init];
+    
+    NSURL * serverUrl = [NSURL URLWithString: [config getServerUrl]];
     
     EMUploader *uploader = [[EMUploader alloc] init];
 
     void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
+        
+#ifdef DEBUG
         NSLog(@"onReady");
         NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
-        NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
-        NSLog(@"url http://127.0.0.1:8088%@", json);
+#endif
         
+        NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
+        
+#ifdef DEBUG
+        NSLog(@"url http://127.0.0.1:8088%@", json);
+#endif
         NSInteger code = [[json valueForKey: @"code"] integerValue];
         
         if (code == 0) {
-            NSString *strUrl = [NSString stringWithFormat: @"http://127.0.0.1:8088%@", [json valueForKey:@"url"]];
+            NSString *strUrl = [NSString stringWithFormat: @"%@%@", [config getUrlPrefix], [json valueForKey:@"url"]];
             [[self showUrl] setStringValue: strUrl];
         } else {
             [[self showUrl] setStringValue: @"server error"];
         }
     };
 
-    [uploader uploadFile: serverUrl
-                filepath: [url path]
-                 onReady: onReady];
+    [uploader uploadFile: serverUrl filepath: [url path] onReady: onReady];
     
 }
+
+
 @end

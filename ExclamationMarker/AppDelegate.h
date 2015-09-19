@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+{
+    NSWindowController * _preferencesController;
+}
 
-
+- (IBAction)openPreferences:(id)sender;
 @end
 
