@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "EMUploader.h"
 
 @implementation ViewController
 
@@ -24,7 +25,7 @@
 
 - (NSURL*) exOpenFile {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
-    [panel setCanChooseFiles: NO];
+    [panel setCanChooseFiles: YES];
     [panel setCanCreateDirectories: NO];
     [panel setCanChooseDirectories: NO];
     
@@ -36,7 +37,7 @@
     
     if (ret == NSFileHandlingPanelOKButton) {
 #ifdef DEBUG
-        NSLog(@"OpenFIle: open files = %@", [panel URLs]);
+        NSLog(@"OpenFile: open files = %@", [panel URLs]);
 #endif
         return [[panel URLs] objectAtIndex:0];
     }
@@ -46,5 +47,34 @@
 
 - (IBAction)uploadAction:(id)sender {
     NSURL * url = [self exOpenFile];
+    
+    if (url == nil) {
+        return;
+    }
+    
+    NSURL * serverUrl = [NSURL URLWithString: @"http://127.0.0.1:8088/index/upload"];
+    
+    EMUploader *uploader = [[EMUploader alloc] init];
+
+    void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
+        NSLog(@"onReady");
+        NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
+        NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
+        NSLog(@"url http://127.0.0.1:8088%@", json);
+        
+        NSInteger code = [[json valueForKey: @"code"] integerValue];
+        
+        if (code == 0) {
+            NSString *strUrl = [NSString stringWithFormat: @"http://127.0.0.1:8088%@", [json valueForKey:@"url"]];
+            [[self showUrl] setStringValue: strUrl];
+        } else {
+            [[self showUrl] setStringValue: @"server error"];
+        }
+    };
+
+    [uploader uploadFile: serverUrl
+                filepath: [url path]
+                 onReady: onReady];
+    
 }
 @end

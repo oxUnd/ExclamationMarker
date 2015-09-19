@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93DA69EB1BAC0F670072DA32 /* EMUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DA69EA1BAC0F670072DA32 /* EMUploader.m */; settings = {ASSET_TAGS = (); }; };
 		93F980D41BAB067A000BDA2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D31BAB067A000BDA2A /* AppDelegate.m */; };
 		93F980D71BAB067A000BDA2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D61BAB067A000BDA2A /* main.m */; };
 		93F980DA1BAB067A000BDA2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D91BAB067A000BDA2A /* ViewController.m */; };
@@ -14,7 +15,6 @@
 		93F980DF1BAB067A000BDA2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93F980DD1BAB067A000BDA2A /* Main.storyboard */; };
 		93F980EA1BAB067A000BDA2A /* ExclamationMarkerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980E91BAB067A000BDA2A /* ExclamationMarkerTests.m */; };
 		93F980F51BAB067A000BDA2A /* ExclamationMarkerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980F41BAB067A000BDA2A /* ExclamationMarkerUITests.m */; };
-		93F981071BAB0BD5000BDA2A /* FileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F981061BAB0BD5000BDA2A /* FileController.m */; settings = {ASSET_TAGS = (); }; };
 		ADBE772E0EC6BBE42AEFF721 /* libPods-ExclamationMarker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D87DE2147202376BE182666 /* libPods-ExclamationMarker.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,8 @@
 		1893233B13E091EF863D75DC /* Pods-ExclamationMarker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExclamationMarker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExclamationMarker/Pods-ExclamationMarker.debug.xcconfig"; sourceTree = "<group>"; };
 		57E4B040CAEEF70DA6FF6E1A /* Pods-ExclamationMarker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExclamationMarker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExclamationMarker/Pods-ExclamationMarker.release.xcconfig"; sourceTree = "<group>"; };
 		8D87DE2147202376BE182666 /* libPods-ExclamationMarker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExclamationMarker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93DA69E91BAC0F670072DA32 /* EMUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMUploader.h; sourceTree = "<group>"; };
+		93DA69EA1BAC0F670072DA32 /* EMUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMUploader.m; sourceTree = "<group>"; };
 		93F980CF1BAB067A000BDA2A /* ExclamationMarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExclamationMarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F980D21BAB067A000BDA2A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		93F980D31BAB067A000BDA2A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,8 +56,6 @@
 		93F980F01BAB067A000BDA2A /* ExclamationMarkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExclamationMarkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F980F41BAB067A000BDA2A /* ExclamationMarkerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExclamationMarkerUITests.m; sourceTree = "<group>"; };
 		93F980F61BAB067A000BDA2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93F981051BAB0BD5000BDA2A /* FileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileController.h; sourceTree = "<group>"; };
-		93F981061BAB0BD5000BDA2A /* FileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,6 @@
 				93F981031BAB0B34000BDA2A /* Controllers */,
 				93F981021BAB0B2B000BDA2A /* Views */,
 				93F980DB1BAB067A000BDA2A /* Assets.xcassets */,
-				93F980DD1BAB067A000BDA2A /* Main.storyboard */,
 				93F980E01BAB067A000BDA2A /* Info.plist */,
 				93F980D51BAB067A000BDA2A /* Supporting Files */,
 			);
@@ -157,6 +156,7 @@
 		93F981021BAB0B2B000BDA2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				93F980DD1BAB067A000BDA2A /* Main.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -168,8 +168,6 @@
 				93F980D31BAB067A000BDA2A /* AppDelegate.m */,
 				93F980D81BAB067A000BDA2A /* ViewController.h */,
 				93F980D91BAB067A000BDA2A /* ViewController.m */,
-				93F981051BAB0BD5000BDA2A /* FileController.h */,
-				93F981061BAB0BD5000BDA2A /* FileController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -177,6 +175,8 @@
 		93F981041BAB0B7A000BDA2A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				93DA69E91BAC0F670072DA32 /* EMUploader.h */,
+				93DA69EA1BAC0F670072DA32 /* EMUploader.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -354,10 +354,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DA69EB1BAC0F670072DA32 /* EMUploader.m in Sources */,
 				93F980DA1BAB067A000BDA2A /* ViewController.m in Sources */,
 				93F980D71BAB067A000BDA2A /* main.m in Sources */,
 				93F980D41BAB067A000BDA2A /* AppDelegate.m in Sources */,
-				93F981071BAB0BD5000BDA2A /* FileController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
