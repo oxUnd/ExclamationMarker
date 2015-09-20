@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@import AppKit;
 
 @interface ViewController : NSViewController
 
 @property (weak) IBOutlet NSTextField *showUrl;
 
-- (NSURL *) exOpenFile;
 
 @end
 

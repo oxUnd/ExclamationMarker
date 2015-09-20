@@ -21,7 +21,6 @@
     // Insert code here to initialize your application
     EMConfig *config = [[EMConfig alloc] init];
     if ([config empty]) {
-        NSLog(@"empty");
         [config resetFromDefault];
     }
     // notification center
@@ -43,7 +42,6 @@
 }
 
 - (IBAction)openPreferences:(id)sender {
-    NSLog(@"preferences");
     if (_preferencesController == nil) {
 
         NSViewController *generalView = [[GeneralPreferencesViewController alloc] init];

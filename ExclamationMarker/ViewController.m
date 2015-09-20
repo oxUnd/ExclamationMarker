@@ -24,70 +24,64 @@
     // Update the view, if already loaded.
 }
 
-- (NSURL*) exOpenFile {
+- (void) openFile:(void (^) (NSURL *)) onComplete {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setCanChooseFiles: YES];
     [panel setCanCreateDirectories: NO];
     [panel setCanChooseDirectories: NO];
-    
-    NSInteger ret = [panel runModal];
-    
-#ifdef DEBUG
-    NSLog(@"OpenFile: runModal ret code = %ld", (long)ret);
-#endif
-    
-    if (ret == NSFileHandlingPanelOKButton) {
-#ifdef DEBUG
-        NSLog(@"OpenFile: open files = %@", [panel URLs]);
-#endif
-        return [[panel URLs] objectAtIndex:0];
-    }
-    
-    return nil;
+    [panel setAllowedFileTypes:@[@"jpg", @"jpeg", @"png", @"gif"]];
+
+    [panel beginSheetModalForWindow: [[self view] window] completionHandler: ^(NSInteger result) {
+        NSLog(@"%ld", result);
+        if (result == NSFileHandlingPanelOKButton) {
+            onComplete([panel URLs][0]);
+        }
+    }];
 }
 
 - (IBAction)uploadAction:(id)sender {
-    NSURL * url = [self exOpenFile];
-    
-    if (url == nil) {
-        return;
-    }
-    
-    EMConfig *config = [[EMConfig alloc] init];
-    
-    NSURL * serverUrl = [NSURL URLWithString: [config getServerUrl]];
-    
-    EMUploader *uploader = [[EMUploader alloc] init];
 
-    void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
+    void (^onComplete) (NSURL *) = ^(NSURL * url) {
 
-        if (err != nil) {
-            NSLog(@"%@", err);
-            return;
-        }
+        EMConfig *config = [[EMConfig alloc] init];
+
+        NSURL * serverUrl = [NSURL URLWithString: [config getServerUrl]];
+
+        EMUploader *uploader = [[EMUploader alloc] init];
+
+        void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
+
+            if (err != nil) {
+                NSLog(@"%@", err);
+                return;
+            }
 
 #ifdef DEBUG
-        NSLog(@"onReady");
-        NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
+            NSLog(@"onReady");
+            NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
 #endif
-        
-        NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
-        
+
+            NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
+
 #ifdef DEBUG
-        NSLog(@"prefix %@, %@", [config getUrlPrefix], json);
+            NSLog(@"prefix %@, %@", [config getUrlPrefix], json);
 #endif
-        NSInteger code = [[json valueForKey: @"code"] integerValue];
-        
-        if (code == 0) {
-            NSString *strUrl = [NSString stringWithFormat: @"%@%@", [config getUrlPrefix], [json valueForKey:@"url"]];
-            [[self showUrl] setStringValue: strUrl];
-        } else {
-            [[self showUrl] setStringValue: @"server error"];
-        }
+            NSInteger code = [[json valueForKey: @"code"] integerValue];
+
+            if (code == 0) {
+                NSString *strUrl = [NSString stringWithFormat: @"%@%@", [config getUrlPrefix], [json valueForKey:@"url"]];
+                //[[NSPasteboard generalPasteboard] setString: strUrl forType: NSStringPboardType];
+                [[self showUrl] setStringValue: strUrl];
+            } else {
+                [[self showUrl] setStringValue: @"server error"];
+            }
+        };
+
+        [uploader uploadFile: serverUrl filepath: [url path] onReady: onReady];
     };
 
-    [uploader uploadFile: serverUrl filepath: [url path] onReady: onReady];
-    
+    [self openFile: onComplete];
+
 }
 
 
