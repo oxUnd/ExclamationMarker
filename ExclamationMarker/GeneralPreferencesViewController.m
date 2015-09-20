@@ -40,6 +40,11 @@
     return NSLocalizedString(@"General", @"Toolbar item name for the General preference pane");
 }
 
+- (void) afterProcess {
+    NSNotificationCenter *ec = [NSNotificationCenter defaultCenter];
+    [ec postNotificationName:@"EMClosePreferencesWindow" object: nil];
+}
+
 - (IBAction)updateConfig:(id)sender {
     NSString *sUrl = [_serverUrl stringValue];
     NSString *prefix = [_urlPrefix stringValue];
@@ -47,11 +52,14 @@
     EMConfig * config = [[EMConfig alloc] init];
     [config setValue: sUrl  forKey: EMServerURl];
     [config setValue: prefix forKey: EMUrlPrefix];
+    [self afterProcess];
 }
 
 - (IBAction)resetConfig:(id)sender {
-    EMConfig * config = [[EMConfig alloc] init];
+    EMConfig *config = [[EMConfig alloc] init];
     [config resetFromDefault];
+    [_serverUrl setStringValue: [config getServerUrl]];
+    [_urlPrefix setStringValue: [config getUrlPrefix]];
 }
 
 @end

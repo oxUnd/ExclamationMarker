@@ -24,6 +24,9 @@
         NSLog(@"empty");
         [config resetFromDefault];
     }
+    // notification center
+    NSNotificationCenter *ec = [NSNotificationCenter defaultCenter];
+    [ec addObserver:self selector:@selector(closePreferencesWindow) name:@"EMClosePreferencesWindow" object:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -43,5 +46,11 @@
         _preferencesController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
     }
     [_preferencesController showWindow: nil];
+}
+
+- (void) closePreferencesWindow {
+    if (_preferencesController != nil) {
+        [_preferencesController close];
+    }
 }
 @end

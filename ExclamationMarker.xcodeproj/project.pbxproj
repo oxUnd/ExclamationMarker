@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		93DA69EB1BAC0F670072DA32 /* EMUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DA69EA1BAC0F670072DA32 /* EMUploader.m */; settings = {ASSET_TAGS = (); }; };
+		93DA69ED1BAD484B0072DA32 /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93DA69EC1BAD484B0072DA32 /* GeneralPreferencesView.xib */; settings = {ASSET_TAGS = (); }; };
+		93DA69F01BAD4A3D0072DA32 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DA69EF1BAD4A3D0072DA32 /* GeneralPreferencesViewController.m */; settings = {ASSET_TAGS = (); }; };
+		93DA69F31BAD5A690072DA32 /* EMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DA69F21BAD5A690072DA32 /* EMConfig.m */; settings = {ASSET_TAGS = (); }; };
 		93F980D41BAB067A000BDA2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D31BAB067A000BDA2A /* AppDelegate.m */; };
 		93F980D71BAB067A000BDA2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D61BAB067A000BDA2A /* main.m */; };
 		93F980DA1BAB067A000BDA2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F980D91BAB067A000BDA2A /* ViewController.m */; };
@@ -41,6 +44,11 @@
 		8D87DE2147202376BE182666 /* libPods-ExclamationMarker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExclamationMarker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DA69E91BAC0F670072DA32 /* EMUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMUploader.h; sourceTree = "<group>"; };
 		93DA69EA1BAC0F670072DA32 /* EMUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMUploader.m; sourceTree = "<group>"; };
+		93DA69EC1BAD484B0072DA32 /* GeneralPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		93DA69EE1BAD4A3D0072DA32 /* GeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferencesViewController.h; sourceTree = "<group>"; };
+		93DA69EF1BAD4A3D0072DA32 /* GeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferencesViewController.m; sourceTree = "<group>"; };
+		93DA69F11BAD5A690072DA32 /* EMConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMConfig.h; sourceTree = "<group>"; };
+		93DA69F21BAD5A690072DA32 /* EMConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMConfig.m; sourceTree = "<group>"; };
 		93F980CF1BAB067A000BDA2A /* ExclamationMarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExclamationMarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F980D21BAB067A000BDA2A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		93F980D31BAB067A000BDA2A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 		93F981021BAB0B2B000BDA2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				93DA69EC1BAD484B0072DA32 /* GeneralPreferencesView.xib */,
 				93F980DD1BAB067A000BDA2A /* Main.storyboard */,
 			);
 			name = Views;
@@ -164,6 +173,8 @@
 		93F981031BAB0B34000BDA2A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				93DA69EE1BAD4A3D0072DA32 /* GeneralPreferencesViewController.h */,
+				93DA69EF1BAD4A3D0072DA32 /* GeneralPreferencesViewController.m */,
 				93F980D21BAB067A000BDA2A /* AppDelegate.h */,
 				93F980D31BAB067A000BDA2A /* AppDelegate.m */,
 				93F980D81BAB067A000BDA2A /* ViewController.h */,
@@ -177,6 +188,8 @@
 			children = (
 				93DA69E91BAC0F670072DA32 /* EMUploader.h */,
 				93DA69EA1BAC0F670072DA32 /* EMUploader.m */,
+				93DA69F11BAD5A690072DA32 /* EMConfig.h */,
+				93DA69F21BAD5A690072DA32 /* EMConfig.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -296,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93F980DC1BAB067A000BDA2A /* Assets.xcassets in Resources */,
+				93DA69ED1BAD484B0072DA32 /* GeneralPreferencesView.xib in Resources */,
 				93F980DF1BAB067A000BDA2A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,8 +368,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DA69F01BAD4A3D0072DA32 /* GeneralPreferencesViewController.m in Sources */,
 				93DA69EB1BAC0F670072DA32 /* EMUploader.m in Sources */,
 				93F980DA1BAB067A000BDA2A /* ViewController.m in Sources */,
+				93DA69F31BAD5A690072DA32 /* EMConfig.m in Sources */,
 				93F980D71BAB067A000BDA2A /* main.m in Sources */,
 				93F980D41BAB067A000BDA2A /* AppDelegate.m in Sources */,
 			);

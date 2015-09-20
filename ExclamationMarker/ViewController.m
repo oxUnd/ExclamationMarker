@@ -60,7 +60,12 @@
     EMUploader *uploader = [[EMUploader alloc] init];
 
     void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
-        
+
+        if (err != nil) {
+            NSLog(@"%@", err);
+            return;
+        }
+
 #ifdef DEBUG
         NSLog(@"onReady");
         NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
@@ -69,7 +74,7 @@
         NSMutableArray *json = [NSJSONSerialization JSONObjectWithData: onData options: NSJSONReadingMutableContainers error: nil];
         
 #ifdef DEBUG
-        NSLog(@"url http://127.0.0.1:8088%@", json);
+        NSLog(@"prefix %@, %@", [config getUrlPrefix], json);
 #endif
         NSInteger code = [[json valueForKey: @"code"] integerValue];
         
