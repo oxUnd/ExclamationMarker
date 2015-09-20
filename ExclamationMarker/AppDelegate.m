@@ -33,6 +33,14 @@
     // Insert code here to tear down your application
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL) flag {
+    if(!flag)
+    {
+        NSWindow * window = [sender windows][0];
+        [window makeKeyAndOrderFront:self];
+    }
+    return YES;
+}
 
 - (IBAction)openPreferences:(id)sender {
     NSLog(@"preferences");
@@ -40,7 +48,8 @@
 
         NSViewController *generalView = [[GeneralPreferencesViewController alloc] init];
 
-        NSArray *controllers = [[NSArray alloc] initWithObjects:generalView, nil];
+        NSArray *controllers;
+        controllers = @[generalView];
 
         NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
         _preferencesController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
