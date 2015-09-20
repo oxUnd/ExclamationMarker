@@ -24,6 +24,7 @@
     // Update the view, if already loaded.
 }
 
+
 - (void) openFile:(void (^) (NSURL *)) onComplete {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setCanChooseFiles: YES];
@@ -70,7 +71,9 @@
 
             if (code == 0) {
                 NSString *strUrl = [NSString stringWithFormat: @"%@%@", [config getUrlPrefix], [json valueForKey:@"url"]];
-                //[[NSPasteboard generalPasteboard] setString: strUrl forType: NSStringPboardType];
+                // the link copy the pasteboard of system
+                [[NSPasteboard generalPasteboard] clearContents];
+                [[NSPasteboard generalPasteboard] setString: strUrl forType: NSStringPboardType];
                 [[self showUrl] setStringValue: strUrl];
             } else {
                 [[self showUrl] setStringValue: @"server error"];

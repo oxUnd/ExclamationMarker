@@ -26,8 +26,8 @@
 }
 
 - (void) resetFromDefault {
-    [self setValue: @"http://127.0.0.1:8088/index/upload"  forKey:EMServerURl];
-    [self setValue: @"http://127.0.0.1:8088" forKey: EMUrlPrefix];
+    [self setValue: @"http://store.orrafy.com/index/upload"  forKey:EMServerURl];
+    [self setValue: @"http://store.orrafy.com" forKey: EMUrlPrefix];
 }
 
 - (void) setValue:(NSString *)value forKey:(NSString *)key {

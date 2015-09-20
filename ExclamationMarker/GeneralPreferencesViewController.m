@@ -41,8 +41,9 @@
 }
 
 - (void) afterProcess {
-    NSNotificationCenter *ec = [NSNotificationCenter defaultCenter];
-    [ec postNotificationName:@"EMClosePreferencesWindow" object: nil];
+    //NSNotificationCenter *ec = [NSNotificationCenter defaultCenter];
+    //[ec postNotificationName:@"EMClosePreferencesWindow" object: nil];
+    [[[self view] window] close];
 }
 
 - (IBAction)updateConfig:(id)sender {
