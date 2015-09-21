@@ -33,8 +33,7 @@
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL) flag {
-    if(!flag)
-    {
+    if(!flag) {
         NSWindow * window = [sender windows][0];
         [window makeKeyAndOrderFront:self];
     }
@@ -49,7 +48,7 @@
         NSArray *controllers;
         controllers = @[generalView];
 
-        NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
+        NSString *title = NSLocalizedString(@"Preferences", @"Custom");
         _preferencesController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
     }
     [_preferencesController showWindow: nil];
