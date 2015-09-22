@@ -12,6 +12,7 @@
 
 @property (weak) IBOutlet NSTextField *showUrl;
 
+@property (weak) IBOutlet NSTextField *errorContainer;
 
 @end
 

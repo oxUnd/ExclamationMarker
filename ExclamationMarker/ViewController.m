@@ -24,8 +24,11 @@
     // Update the view, if already loaded.
 }
 
-
 - (void) openFile:(void (^) (NSURL *)) onComplete {
+    // init
+    [self showError:@""];
+    [[self showUrl] setStringValue: @""];
+    
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setCanChooseFiles: YES];
     [panel setCanCreateDirectories: NO];
@@ -33,11 +36,14 @@
     [panel setAllowedFileTypes:@[@"jpg", @"jpeg", @"png", @"gif"]];
 
     [panel beginSheetModalForWindow: [[self view] window] completionHandler: ^(NSInteger result) {
-        NSLog(@"%ld", result);
         if (result == NSFileHandlingPanelOKButton) {
             onComplete([panel URLs][0]);
         }
     }];
+}
+
+- (void) showError: (NSString *) err {
+    [[self errorContainer] setStringValue:err];
 }
 
 - (IBAction)uploadAction:(id)sender {
@@ -53,10 +59,15 @@
         void (^onReady) (NSData *, NSURLResponse *, NSError *) = ^(NSData *onData, NSURLResponse *res, NSError *err) {
 
             if (err != nil) {
-                NSLog(@"%@", err);
+                [self showError: [NSString stringWithFormat:@"%@", err]];
                 return;
             }
-
+            NSHTTPURLResponse *response = (NSHTTPURLResponse *) res;
+            if ([response statusCode] != 200) {
+                [self showError:[NSString stringWithFormat:@"HTTP Status code: %ld", [response statusCode]]];
+                return;
+            }
+            
 #ifdef DEBUG
             NSLog(@"onReady");
             NSLog(@"%@", [[NSString alloc] initWithData: onData encoding: NSUTF8StringEncoding]);
@@ -76,7 +87,7 @@
                 [[NSPasteboard generalPasteboard] setString: strUrl forType: NSStringPboardType];
                 [[self showUrl] setStringValue: strUrl];
             } else {
-                [[self showUrl] setStringValue: @"server error"];
+                [self showError:@"Server error."];
             }
         };
 

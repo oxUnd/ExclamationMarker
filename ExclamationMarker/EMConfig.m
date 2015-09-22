@@ -26,8 +26,8 @@
 }
 
 - (void) resetFromDefault {
-    [self setValue: @"http://store.orrafy.com/index/upload"  forKey:EMServerURl];
-    [self setValue: @"http://store.orrafy.com" forKey: EMUrlPrefix];
+    [self setValue: @"http://store.orrafy.com/receiver"  forKey:EMServerURl];
+    [self setValue: @"http://store.orrafy.com/get" forKey: EMUrlPrefix];
 }
 
 - (void) setValue:(NSString *)value forKey:(NSString *)key {

@@ -23,7 +23,6 @@ static NSString *const FORM_FLE_INPUT = @"uploaded";
 
 + (void)initialize {
     if (self == [EMUploader class]) {
-        NSLog(@"init EMUploader");
     }
 }
 
@@ -31,7 +30,7 @@ static NSString *const FORM_FLE_INPUT = @"uploaded";
 
     NSData *data = [NSData dataWithContentsOfFile:aFilepath];
     NSMutableURLRequest *req = [self postRequestWithUrl:aServerUrl boundry:BOUNDRY filename:[aFilepath lastPathComponent] data:data];
-
+    
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *reqTask = [session dataTaskWithRequest:req completionHandler:onReady];
     [reqTask resume];
@@ -44,6 +43,7 @@ static NSString *const FORM_FLE_INPUT = @"uploaded";
 
     [req setHTTPMethod:@"POST"];
     [req  setValue: [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry] forHTTPHeaderField:@"Content-Type"];
+    [req setValue: @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36" forHTTPHeaderField: @"User-Agent"];
 
     NSMutableData *postData = [NSMutableData dataWithCapacity:[data length] + 512]; 
     [postData appendData: [[NSString stringWithFormat:@"--%@\r\n", boundry] dataUsingEncoding:NSUTF8StringEncoding]];
